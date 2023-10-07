@@ -45,7 +45,20 @@ def multiply(a, b):
 # The 'multiply' function is decorated with both logging and input validation.
 
 
+-------multiple Args------
+def validate_positive_input(func):
+    def wrapper(x, y):
+        if x <= 0 or y <= 0:
+            raise ValueError("Both inputs must be positive")
+        return func(x, y)
+    return wrapper
 
+@validate_positive_input
+def add_positive_numbers(x, y):
+    return x + y
+
+result = add_positive_numbers(3, 4)  # This will work.
+result = add_positive_numbers(2, -1)  # This will raise a ValueError.
 
 
 
